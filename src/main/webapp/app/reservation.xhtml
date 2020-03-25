@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/templates/main.xhtml">
+    <ui:define name="content">
+
+        <f:metadata>
+            <f:viewParam name="id" value="#{reservationController.id}"/>
+            <f:viewAction action="#{reservationController.openReservation}"/>
+        </f:metadata>
+
+        <h1>#{reservationController.reservation.book.title}</h1>
+        <table>
+            <tr>
+                <td>id</td>
+                <td>#{reservationController.reservation.id}</td>
+            </tr>
+            <tr>
+                <td>isbn</td>
+                <td>#{reservationController.reservation.book.isbn}</td>
+            </tr>
+            <tr>
+                <td>author</td>
+                <td>#{reservationController.reservation.book.author}</td>
+            </tr>
+            <tr>
+                <td>year</td>
+                <td>#{reservationController.reservation.book.year}</td>
+            </tr>
+
+            <tr>
+                <td>description</td>
+                <td>#{reservationController.reservation.book.description}</td>
+            </tr>
+            <tr>
+                <td>on user</td>
+                <td>#{reservationController.reservation.user.loginName}</td>
+            </tr>
+        </table>
+
+
+        <h:form>
+
+            <p>
+                <h:outputLabel value="Login Name for new user"/>
+                <h:inputText id="loginName" value="#{reservationController.loginName}"/>
+                <h:messages for="loginName"/>
+            </p>
+
+            <h:commandButton value="Reserve"
+                             action="#{reservationController.reserve(reservationController.id)}"/>
+            <h:commandButton value="Available"
+                             action="#{reservationController.available(reservationController.id)}"/>
+            <h:commandButton value="Not Available"
+                             action="#{reservationController.notAvailable(reservationController.id)}"/>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+</html>
